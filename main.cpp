@@ -50,7 +50,7 @@ int main()
     // Print coordinates of points and derivatives 
     // of all curves in the container at t=PI/4.
     float t = M_PI / 4;
-    std::cout << "Curve type\t\t coords in point pi/4\t\t derivative in point pi/4" << std::endl;;
+    std::cout << "Curve type\t\t Coords in point pi/4\t\t Derivative in point pi/4" << std::endl;;
     for (auto* curve : CurvesList)
     {
         Vector3 point = curve->getPoint(t);
