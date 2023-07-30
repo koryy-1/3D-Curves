@@ -1,1 +1,1 @@
-## 3D-Curves - program for generate curves with random parametres - circles, ellipses and helixes
+## program for generating curves with random parameters - circles, ellipses and helixes
