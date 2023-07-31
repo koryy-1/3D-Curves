@@ -24,34 +24,36 @@ int main()
     srand(time(NULL));
 
     // create and populate vector of Curves
-    std::vector<Curve*> CurvesList;
+    std::vector<std::unique_ptr<Curve>> CurvesList;
 
     int N = getRandomNum(10, 100);
 
-    Curve* curve;
     for (size_t i = 0; i < N; i++)
     {
         int choice = getRandomNum(1, 3);
+        std::unique_ptr<Curve> curve;
+
         switch (choice)
         {
         case 1:
-            curve = new Circle(getRandomNum(1, 10));
+            curve = std::make_unique<Circle>(getRandomNum(1, 10));
             break;
         case 2:
-            curve = new Ellipse(getRandomNum(1, 10), getRandomNum(1, 10));
+            curve = std::make_unique<Ellipse>(getRandomNum(1, 10), getRandomNum(1, 10));
             break;
         case 3:
-            curve = new Helix(getRandomNum(1, 10), getRandomNum(1, 10));
+            curve = std::make_unique<Helix>(getRandomNum(1, 10), getRandomNum(1, 10));
             break;
         }
-        CurvesList.push_back(curve);
+
+        CurvesList.push_back(std::move(curve));
     }
 
     // Print coordinates of points and derivatives 
     // of all curves in the container at t=PI/4.
     float t = M_PI / 4;
     std::cout << "Curve type\t\t Coords in point pi/4\t\t Derivative in point pi/4" << std::endl;;
-    for (auto* curve : CurvesList)
+    for (auto& curve : CurvesList)
     {
         Vector3 point = curve->getPoint(t);
         Vector3 derivatives = curve->getDerivative(t);
@@ -64,11 +66,11 @@ int main()
     // Populate a second container 
     // that would contain only circles from the first container, via pointers
     std::vector<Circle*> CirclesList;
-    for (auto* curve : CurvesList)
+    for (auto& curve : CurvesList)
     {
-        if (typeid(*curve) == typeid(Circle))
+        if (typeid(*curve.get()) == typeid(Circle))
         {
-            CirclesList.push_back(reinterpret_cast<Circle*>(curve));
+            CirclesList.push_back(reinterpret_cast<Circle*>(curve.get()));
         }
     }
     
@@ -80,7 +82,7 @@ int main()
     std::sort(CirclesList.begin(), CirclesList.end(), compare_radii);
 
     std::cout << "Radii in second container:" << std::endl;
-    for (auto* circle : CirclesList)
+    for (auto& circle : CirclesList)
     {
         std::cout << circle->Radius << std::endl;
     }
@@ -88,16 +90,12 @@ int main()
 
     // Compute the total sum of radii of all curves in the second container.
     float totalSumOfRadii = 0;
-    for (auto* circle : CirclesList)
+    for (auto& circle : CirclesList)
     {
         totalSumOfRadii += circle->Radius;
     }
     std::cout << "Total sum of radii in second container = " << totalSumOfRadii << std::endl;
 
-    // clear memory
-    for (auto* curve : CurvesList) {
-        delete curve;
-    }
     CurvesList.clear();
     CirclesList.clear();
 }
