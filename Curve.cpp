@@ -1,11 +1,11 @@
 #include "Curve.h"
 
-Vector3 Curve::getPoint(float t)
+Vector3* Curve::getPoint(float t)
 {
-	return Vector3(0, 0, 0);
+	return new Vector3(0, 0, 0);
 }
 
-Vector3 Curve::getDerivative(float t)
+Vector3* Curve::getDerivative(float t)
 {
-	return Vector3(0, 0, 0);
+	return new Vector3(0, 0, 0);
 }

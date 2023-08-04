@@ -3,11 +3,12 @@
 
 class Circle : public Curve
 {
-public:
+private:
 	float Radius;
-
+public:
 	Circle(float radius);
-	Vector3 getPoint(float t) override;
-	Vector3 getDerivative(float t) override;
+	float getRadius();
+	Vector3* getPoint(float t) override;
+	Vector3* getDerivative(float t) override;
 };
 

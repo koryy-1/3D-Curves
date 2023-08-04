@@ -1,0 +1,12 @@
+﻿  main.cpp
+C:\progs\Soft\3D-Curves\main.cpp(10,42): warning C4305: инициализация: усечение из "double" в "float"
+C:\progs\Soft\3D-Curves\main.cpp(24,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\progs\Soft\3D-Curves\main.cpp(31,26): warning C4018: <: несоответствие типов со знаком и без знака
+C:\progs\Soft\3D-Curves\main.cpp(102,54): warning C4305: аргумент: усечение из "double" в "float"
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\memory(3433,56): warning C4244: аргумент: преобразование "_Ty" в "float", возможна потеря данных
+          with
+          [
+              _Ty=int
+          ]
+C:\progs\Soft\3D-Curves\main.cpp(39,13): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::unique_ptr<Circle,std::default_delete<Circle>> std::make_unique<Circle,int,0>(int &&)"
+  3D-Curves.vcxproj -> C:\progs\Soft\3D-Curves\Debug\3D-Curves.exe

@@ -3,12 +3,14 @@
 
 class Ellipse : public Curve
 {
-public:
+private:
 	float RadiusX;
 	float RadiusY;
-
+public:
 	Ellipse(float radiusX, float radiusY);
-	Vector3 getPoint(float t) override;
-	Vector3 getDerivative(float t) override;
+	float getRadiusX();
+	float getRadiusY();
+	Vector3* getPoint(float t) override;
+	Vector3* getDerivative(float t) override;
 };
 

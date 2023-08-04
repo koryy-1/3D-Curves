@@ -3,12 +3,14 @@
 
 class Helix : public Curve
 {
-public:
+private:
 	float Radius;
 	float Step;
-
+public:
 	Helix(float radius, float step);
-	Vector3 getPoint(float t) override;
-	Vector3 getDerivative(float t) override;
+	float getRadius();
+	float getStep();
+	Vector3* getPoint(float t) override;
+	Vector3* getDerivative(float t) override;
 };
 

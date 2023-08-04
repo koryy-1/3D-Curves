@@ -14,9 +14,9 @@ int getRandomNum(int start, int end)
     return start + (std::rand() % (end - start + 1));
 }
 
-bool compare_radii(const Circle* first, const Circle* second)
+bool compare_radii(Circle* first, Circle* second)
 {
-    return first->Radius < second->Radius;
+    return first->getRadius() < second->getRadius();
 }
 
 int main()
@@ -55,11 +55,11 @@ int main()
     std::cout << "Curve type\t\t Coords in point pi/4\t\t Derivative in point pi/4" << std::endl;;
     for (auto& curve : CurvesList)
     {
-        Vector3 point = curve->getPoint(t);
-        Vector3 derivatives = curve->getDerivative(t);
+        Vector3* point = curve->getPoint(t);
+        Vector3* derivatives = curve->getDerivative(t);
 
-        std::cout << typeid(*curve).name() << "\t\t" << point.X << " " << point.Y << " " << point.Z << "\t\t"
-            << derivatives.X << " " << derivatives.Y << " " << derivatives.Z << std::endl;
+        std::cout << typeid(*curve).name() << "\t\t" << point->X << " " << point->Y << " " << point->Z << "\t\t"
+            << derivatives->X << " " << derivatives->Y << " " << derivatives->Z << std::endl;
     }
     std::cout << std::endl;
 
@@ -68,9 +68,10 @@ int main()
     std::vector<Circle*> CirclesList;
     for (auto& curve : CurvesList)
     {
-        if (typeid(*curve.get()) == typeid(Circle))
+        Circle* circle = dynamic_cast<Circle*>(curve.get());
+        if (circle)
         {
-            CirclesList.push_back(reinterpret_cast<Circle*>(curve.get()));
+            CirclesList.push_back(circle);
         }
     }
     
@@ -84,7 +85,7 @@ int main()
     std::cout << "Radii in second container:" << std::endl;
     for (auto& circle : CirclesList)
     {
-        std::cout << circle->Radius << std::endl;
+        std::cout << circle->getRadius() << std::endl;
     }
     std::cout << std::endl;
 
@@ -92,7 +93,7 @@ int main()
     float totalSumOfRadii = 0;
     for (auto& circle : CirclesList)
     {
-        totalSumOfRadii += circle->Radius;
+        totalSumOfRadii += circle->getRadius();
     }
     std::cout << "Total sum of radii in second container = " << totalSumOfRadii << std::endl;
 
